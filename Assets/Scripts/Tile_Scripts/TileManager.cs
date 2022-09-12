@@ -5,9 +5,15 @@ using Zenject;
 
 public class TileManager : MonoBehaviour
 {
-    [Inject] private ILevelManager _levelManager;
+    ILevelManager _levelManager;
     
-    public Dictionary<int, List<Tile>> TilesListPerRooms = new Dictionary<int, List<Tile>>();
+    [SerializeField] private Dictionary<int, List<Tile>> TilesListPerRooms = new Dictionary<int, List<Tile>>();
+
+    [Inject]
+    public void Init(ILevelManager levelManager)
+    {
+        _levelManager = levelManager;
+    }
 
     private void Start()
     {

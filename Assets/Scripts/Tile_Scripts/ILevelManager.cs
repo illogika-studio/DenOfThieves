@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ILevelManager
 {
-    public List<Room> RoomsList { get; set; }
+    List<Room> RoomsList { get; set; }
 }
