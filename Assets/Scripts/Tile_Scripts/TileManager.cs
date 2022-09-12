@@ -1,30 +1,19 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class TileManager : MonoBehaviour
 {
-    private static TileManager _instance;
-
-    public static TileManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new TileManager();
-            }
-
-            return _instance;
-        }
-    }
+    [Inject] private ILevelManager _levelManager;
     
-    public Dictionary<int, List<Tile>> TilesListPerRooms;
+    public Dictionary<int, List<Tile>> TilesListPerRooms = new Dictionary<int, List<Tile>>();
 
-    private void Awake()
+    private void Start()
     {
         if (TilesListPerRooms.Count == 0)
         {
-            foreach (var room in LevelManager.Instance.RoomsList)
+            foreach (var room in _levelManager.RoomsList)
             {
                 TilesListPerRooms.Add(room.Id, room.TilesList);
             }

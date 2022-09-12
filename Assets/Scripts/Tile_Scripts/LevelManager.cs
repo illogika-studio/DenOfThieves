@@ -1,28 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : ILevelManager
 {
-    private static LevelManager _instance;
-
-    public static LevelManager Instance
+    [SerializeField]
+    private List<Room> _roomsList = new List<Room>();
+    public List<Room> RoomsList
     {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new LevelManager();
-            }
-
-            return _instance;
-        }
-    }
-
-    private List<Room> _roomsList;
-    public List<Room> RoomsList => _roomsList;
-    
-    public void TestInstance()
-    {
-        
+        get => _roomsList;
+        set => _roomsList = value;
     }
 }
