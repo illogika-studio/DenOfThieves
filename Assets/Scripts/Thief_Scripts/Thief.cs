@@ -1,14 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class Thief : MonoBehaviour
+public class Thief : BaseThief
 {
-    [Inject] private ThiefData _thiefData;
+    private ThiefData _thiefData;
 
-    private void Awake()
+    [Inject]
+    public void Initialize(ThiefData thiefData)
+    {
+        _thiefData = thiefData;
+    }
+    
+    private void Start()
     {
         Debug.Log(_thiefData.MaxActionPoints);
     }
