@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 0
+  _startingTile: {fileID: 0}
   _tilesList: []
 --- !u!1001 &2208945860916448370
 PrefabInstance:
@@ -256,6 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 0
+  _startingTile: {fileID: 0}
   _tilesList: []
 --- !u!4 &5931531579326271810 stripped
 Transform:
@@ -473,6 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 0
+  _startingTile: {fileID: 0}
   _tilesList: []
 --- !u!4 &565946400632433550 stripped
 Transform:
@@ -534,6 +537,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6071504609825901779, guid: 0f7f29ce89e8d403a8efb69d3472f775, type: 3}
+      propertyPath: _startingTile
+      value: 
+      objectReference: {fileID: 4002460386173221038}
+    - target: {fileID: 6071504609825901779, guid: 0f7f29ce89e8d403a8efb69d3472f775, type: 3}
+      propertyPath: _isStartingRoom
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f7f29ce89e8d403a8efb69d3472f775, type: 3}
 --- !u!4 &302319268681697297 stripped
@@ -541,6 +552,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4222546368927545593, guid: 0f7f29ce89e8d403a8efb69d3472f775, type: 3}
   m_PrefabInstance: {fileID: 4515828709312033000}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4002460386173221038 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 657783702866135110, guid: 0f7f29ce89e8d403a8efb69d3472f775, type: 3}
+  m_PrefabInstance: {fileID: 4515828709312033000}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a600acef9c6104932a93ceb07f8a23a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7703727186097486907 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6071504609825901779, guid: 0f7f29ce89e8d403a8efb69d3472f775, type: 3}

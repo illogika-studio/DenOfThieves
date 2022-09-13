@@ -45,4 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerController: {fileID: 0}
-  _thief: {fileID: 0}
+  _basePlayer: {fileID: 2665485177160546591, guid: 7188fc8103b4e409692b64a9bae1e054, type: 3}
+  _defaultInstaller: {fileID: 0}

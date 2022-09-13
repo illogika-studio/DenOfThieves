@@ -1,19 +1,18 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 public class DefaultInstaller : MonoInstaller
 {
     [SerializeField] private LevelData _levelData;
-    [SerializeField] private GameObject thiefPrefab;
     
     public override void InstallBindings()
     {
         Container.Bind<ILevelData>().To<LevelData>().FromInstance(_levelData) ;
-        Container.Bind<Thief>().FromComponentInNewPrefab(thiefPrefab).AsSingle();
     }
 
-    public void InstantiatePlayer(BaseThief thief, Transform playerController)
+    public BasePlayer InstantiatePlayer(BasePlayer player, Transform playerController)
     {
-        Container.InstantiatePrefab(thief, playerController);
+       return Container.InstantiatePrefabForComponent<BasePlayer>(player, playerController);
     }
 }
