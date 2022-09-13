@@ -287,8 +287,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelProto
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90df894e527704915a68d9df93d47d70, type: 3}
 --- !u!1 &963194225
 GameObject:
@@ -439,6 +438,17 @@ Transform:
   m_Father: {fileID: 111323744}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1193395934 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2795180286856111126, guid: 7946a8842808c4b8cbf7ce288f7d82fb, type: 3}
+  m_PrefabInstance: {fileID: 6274496658337368590}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537689c90f6eb48ae95cc16e560bbc3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1381412869
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +691,10 @@ PrefabInstance:
       propertyPath: thiefPrefab
       value: 
       objectReference: {fileID: 2665485177160546789, guid: 7188fc8103b4e409692b64a9bae1e054, type: 3}
+    - target: {fileID: 3402526823684650366, guid: bd27e723c5921419bada2d355fc9892f, type: 3}
+      propertyPath: _tileManager
+      value: 
+      objectReference: {fileID: 1193395934}
     - target: {fileID: 3402526823684650366, guid: bd27e723c5921419bada2d355fc9892f, type: 3}
       propertyPath: _levelManager
       value: 
