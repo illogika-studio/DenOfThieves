@@ -7,7 +7,7 @@ public class TileManager : MonoBehaviour
 {
     ILevelData _levelData;
     
-    [SerializeField] private Dictionary<int, List<Tile>> TilesListPerRooms = new Dictionary<int, List<Tile>>();
+    private Dictionary<int, List<Tile>> TilesListPerRooms = new Dictionary<int, List<Tile>>();
 
     [Inject]
     public void Init(ILevelData levelData)
