@@ -5,21 +5,21 @@ using Zenject;
 
 public class TileManager : MonoBehaviour
 {
-    ILevelManager _levelManager;
+    ILevelData _levelData;
     
     [SerializeField] private Dictionary<int, List<Tile>> TilesListPerRooms = new Dictionary<int, List<Tile>>();
 
     [Inject]
-    public void Init(ILevelManager levelManager)
+    public void Init(ILevelData levelData)
     {
-        _levelManager = levelManager;
+        _levelData = levelData;
     }
 
     private void Start()
     {
         if (TilesListPerRooms.Count == 0)
         {
-            foreach (var room in _levelManager.RoomsList)
+            foreach (var room in _levelData.RoomsList)
             {
                 TilesListPerRooms.Add(room.Id, room.TilesList);
             }

@@ -5,12 +5,12 @@ using Zenject;
 
 public class Action : MonoBehaviour
 {
-    private ILevelManager _levelManager;
+    private ILevelData _levelData;
     
     [Inject]
-    private void Initialize(ILevelManager levelManager)
+    private void Initialize(ILevelData levelData)
     {
-        _levelManager = levelManager;
+        _levelData = levelData;
     }
     // Start is called before the first frame update
     void Start()

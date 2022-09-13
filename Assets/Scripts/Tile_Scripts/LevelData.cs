@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour, ILevelManager
+public class LevelData : MonoBehaviour, ILevelData
 {
     [SerializeField]
     private List<Room> _roomsList = new List<Room>();

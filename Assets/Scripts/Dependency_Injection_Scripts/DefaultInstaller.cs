@@ -3,10 +3,10 @@ using Zenject;
 
 public class DefaultInstaller : MonoInstaller
 {
-    [SerializeField] private LevelManager _levelManager;
+    [SerializeField] private LevelData _levelData;
 
     public override void InstallBindings()
     {
-        Container.Bind<ILevelManager>().To<LevelManager>().FromInstance(_levelManager);
+        Container.Bind<ILevelData>().To<LevelData>().FromInstance(_levelData);
     }
 }
