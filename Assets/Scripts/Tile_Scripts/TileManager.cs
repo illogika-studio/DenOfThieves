@@ -6,6 +6,8 @@ using Zenject;
 public class TileManager : MonoBehaviour, ITileManager
 {
     private ILevelData _levelData;
+    private Room _startingRoom;
+    public Room StartingRoom => _startingRoom;
     public Dictionary<int, List<Tile>> TilesListPerRooms { get; } = new Dictionary<int, List<Tile>>();
     public List<Tile> StartingTilesList { get; } = new List<Tile>();
 
@@ -24,6 +26,11 @@ public class TileManager : MonoBehaviour, ITileManager
             
             if (room.StartingTile != null)
             {
+                if(StartingTilesList.Count < 1)
+                {
+                    _startingRoom = room;
+                }
+
                 StartingTilesList.Add(room.StartingTile);   
             }
         }
@@ -48,6 +55,18 @@ public class TileManager : MonoBehaviour, ITileManager
             }
         }
 
+        return null;
+    }
+
+    public Tile GetTileFromCoordinates(Coordinates coordinates, int roomID)
+    {
+        foreach (var tile in TilesListPerRooms[roomID])
+        {
+            if (tile.Coordinates == coordinates)
+            {
+                return tile;
+            }
+        }
         return null;
     }
 }

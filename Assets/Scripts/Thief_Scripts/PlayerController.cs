@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         var startingTile = _tileManager.StartingTilesList[0];
-       _player.SetCurrentTile(startingTile);
+        _player.SetCurrentRoom(_tileManager.StartingRoom);
+        _player.SetCurrentTile(startingTile);
     }
 
     private void Update()
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer(Coordinates coordinates)
     {
-        Tile targetTile = _tileManager.GetTileFromCoordinates(coordinates);
+        Tile targetTile = _tileManager.GetTileFromCoordinates(coordinates, _player.CurrentRoom.Id);
 
         if (targetTile is not null)
         {
