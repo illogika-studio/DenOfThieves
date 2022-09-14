@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class BasePlayer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Tile _currentTile;
+    public Tile CurrentTile => _currentTile;
 
-    // Update is called once per frame
-    void Update()
+    public void SetCurrentTile(Tile tile)
     {
-        
+        _currentTile = tile;
+        transform.position = _currentTile.transform.position;
     }
 }

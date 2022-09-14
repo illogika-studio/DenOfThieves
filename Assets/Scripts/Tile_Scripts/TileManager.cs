@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
 public class TileManager : MonoBehaviour, ITileManager
 {
     private ILevelData _levelData;
-    private Dictionary<int, List<Tile>> TilesListPerRooms = new Dictionary<int, List<Tile>>();
+    public Dictionary<int, List<Tile>> TilesListPerRooms { get; } = new Dictionary<int, List<Tile>>();
     public List<Tile> StartingTilesList { get; } = new List<Tile>();
 
     [Inject]
@@ -19,15 +20,34 @@ public class TileManager : MonoBehaviour, ITileManager
         //Populate the list of tiles per rooms and the list of starting tiles
         foreach (var room in _levelData.RoomsList)
         {
-            if (TilesListPerRooms.Count == 0)
-            {
-                TilesListPerRooms.Add(room.Id, room.TilesList);
-            }
+            TilesListPerRooms.Add(room.Id, room.TilesList);
             
             if (room.StartingTile != null)
             {
                 StartingTilesList.Add(room.StartingTile);   
             }
         }
+    }
+
+    public int GetRoomIdFromTile(Tile tile)
+    {
+        int myKey = TilesListPerRooms.FirstOrDefault(x => x.Value.Contains(tile)).Key;
+        return myKey;
+    }
+    
+    public Tile GetTileFromCoordinates(Coordinates coordinates)
+    {
+        foreach (var room in TilesListPerRooms)
+        {
+            foreach (var tile in room.Value)
+            {
+                if (tile.Coordinates == coordinates)
+                {
+                    return tile;
+                }
+            }
+        }
+
+        return null;
     }
 }
