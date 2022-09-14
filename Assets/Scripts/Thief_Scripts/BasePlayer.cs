@@ -10,6 +10,6 @@ public class BasePlayer : MonoBehaviour
     public void SetCurrentTile(Tile tile)
     {
         _currentTile = tile;
-        transform.position = _currentTile.transform.position;
+        transform.position = new Vector3(_currentTile.Coordinates.x, 0, _currentTile.Coordinates.z);
     }
 }

@@ -15,10 +15,16 @@ public class Coordinates
         x = 0;
     }
     
-    public Coordinates(int zPoint, int xPoint)
+    public Coordinates(int xPoint, int zPoint)
     {
-        z = zPoint;
         x = xPoint;
+        z = zPoint;
+    }
+    
+    public Coordinates(float xPoint, float zPoint)
+    {
+        x = (int)xPoint;
+        z = (int)zPoint;
     }
 
     public static bool operator ==(Coordinates lhs, Coordinates rhs)

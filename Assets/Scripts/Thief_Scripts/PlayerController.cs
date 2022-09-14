@@ -25,19 +25,19 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.W))
         {
-            MovePlayer(new Coordinates(currentTileCoordinates.z, currentTileCoordinates.x - 1));
+            MovePlayer(new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z + 1));
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            MovePlayer(new Coordinates(currentTileCoordinates.z, currentTileCoordinates.x + 1));
+            MovePlayer(new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z - 1));
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
-            MovePlayer(new Coordinates(currentTileCoordinates.z - 1, currentTileCoordinates.x));
+            MovePlayer(new Coordinates(currentTileCoordinates.x - 1, currentTileCoordinates.z));
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            MovePlayer(new Coordinates(currentTileCoordinates.z + 1, currentTileCoordinates.x));
+            MovePlayer(new Coordinates(currentTileCoordinates.x + 1, currentTileCoordinates.z));
         }
     }
 

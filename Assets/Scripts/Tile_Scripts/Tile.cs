@@ -10,16 +10,50 @@ public abstract class Tile : MonoBehaviour
     public Coordinates Coordinates { get; private set; }
     public Dictionary<InteractableElement, List<Action>> AvailableActionList { get; private set; }
 
+    public abstract void UpdateLightValue(int amount);
+    public abstract void UpdateSoundValue(int amount);
+    
     private void Awake()
     {
-        var roomPosition = transform.parent.parent.position;
-        //int z = (int)transform.position.z + (int)roomPosition.z;
-        //int x = (int)transform.position.x + (int)roomPosition.x;
-        
-        Coordinates = new Coordinates((int)transform.position.z, (int)transform.position.x);
+        var x = Mathf.Round(transform.position.x);
+        var z = Mathf.Round(transform.position.z);
+
+        var offset = GetOffset();
+                
+        Coordinates = new Coordinates(x + offset.x, z + offset.z);
     }
 
-    public abstract void UpdateLightValue(int amount);
+    private Vector3 GetOffset()
+    {
+        Vector3 offset = Vector3.zero;
+        
+        if (transform.rotation.eulerAngles.y == 90 || transform.rotation.eulerAngles.y == -270)
+        {
+            offset = new Vector3(0, 0, -1);
+        }
+        else if (transform.rotation.eulerAngles.y == 180 || transform.rotation.eulerAngles.y == -180)
+        {
+            offset = new Vector3(-1, 0, -1);
+        }
+        else if (transform.rotation.eulerAngles.y == 270 || transform.rotation.eulerAngles.y == -90)
+        {
+            offset = new Vector3(-1, 0, 0);
+        }
+
+        return offset;
+    }
     
-    public abstract void UpdateSoundValue(int amount);
+    public Vector3 GetRealPosition()
+    {
+        return GetRoundedPosition() + GetOffset();
+    }
+
+    private Vector3 GetRoundedPosition()
+    {
+        var roundX = Mathf.Round(transform.position.x);
+        var roundY = Mathf.Round(transform.position.y);
+        var roundZ = Mathf.Round(transform.position.z);
+
+        return new Vector3(roundX, roundY, roundZ);
+    }
 }
