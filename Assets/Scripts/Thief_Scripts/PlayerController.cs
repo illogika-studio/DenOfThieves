@@ -1,59 +1,61 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IPlayerController
 {
     private BasePlayer _player;
     private ITileManager _tileManager;
-    
+
     [Inject]
     public void Init(ITileManager tileManager)
     {
         _tileManager = tileManager;
     }
-    
+
     private void Start()
     {
         var startingTile = _tileManager.StartingTilesList[0];
         _player.SetCurrentRoom(_tileManager.StartingRoom);
         _player.SetCurrentTile(startingTile);
+        UpdatePlayerMovement();
     }
 
-    private void Update()
+    public void UpdatePlayerMovement()
     {
         var currentTileCoordinates = _player.CurrentTile.Coordinates;
-        
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            MovePlayer(new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z + 1));
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            MovePlayer(new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z - 1));
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            MovePlayer(new Coordinates(currentTileCoordinates.x - 1, currentTileCoordinates.z));
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            MovePlayer(new Coordinates(currentTileCoordinates.x + 1, currentTileCoordinates.z));
-        }
+        Coordinates rightMostCoordinates = new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z + 1);
+        Coordinates leftMostCoordinates = new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z - 1);
+        Coordinates lowerCoordinates = new Coordinates(currentTileCoordinates.x + 1, currentTileCoordinates.z);
+        Coordinates upperCoordinates = new Coordinates(currentTileCoordinates.x - 1, currentTileCoordinates.z);
+
+        UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType.Up, upperCoordinates);
+        UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType.Down, lowerCoordinates);
+        UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType.Left, leftMostCoordinates);
+        UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType.Right, rightMostCoordinates);
     }
 
-    private void MovePlayer(Coordinates coordinates)
+    private void UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType buttonType, Coordinates targetCoordinates)
     {
-        Tile targetTile = _tileManager.GetTileFromCoordinates(coordinates, _player.CurrentRoom.Id);
+        Tile targetTile = _tileManager.GetTileFromCoordinates(targetCoordinates, _player.CurrentRoom.Id);
+        _player.UpdateMoveButtonByTile(buttonType, targetTile);
+    }
 
-        if (targetTile is not null)
-        {
-            _player.SetCurrentTile(targetTile);
-        }
+    public void MovePlayer(Tile startingTile)
+    {
+        _player.SetCurrentTile(startingTile);
+        UpdatePlayerMovement();
     }
 
     public void SetPlayer(BasePlayer player)
     {
         _player = player;
+    }
+
+    public Transform GetTransform()
+    {
+        return this.transform;
     }
 }

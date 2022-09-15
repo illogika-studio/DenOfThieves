@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2259224014053561736}
   - component: {fileID: 1027055875395759051}
   - component: {fileID: 591228139741013432}
+  - component: {fileID: 7607959680558126866}
+  - component: {fileID: 743926427636819282}
   m_Layer: 0
   m_Name: MoveButton
   m_TagString: Untagged
@@ -83,3 +85,30 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7607959680558126866
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617649589166402118}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &743926427636819282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617649589166402118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583b1db3be8f40c4cbb05143ee7bb632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  affectedTile: {fileID: 0}
+  _playerController: {fileID: 2364854831890822427, guid: 362a81d7e255e47f4b18f468008e4a11, type: 3}
