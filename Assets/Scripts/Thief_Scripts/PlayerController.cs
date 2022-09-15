@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     public void UpdatePlayerMovement()
     {
-<<<<<<< Updated upstream
         var currentTileCoordinates = _player.CurrentTile.Coordinates;
         Coordinates rightMostCoordinates = new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z + 1);
         Coordinates leftMostCoordinates = new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z - 1);
@@ -48,52 +47,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
     {
         _player.SetCurrentTile(startingTile);
         UpdatePlayerMovement();
-=======
-        /*var currentTileCoordinates = _player.CurrentTile.Coordinates;
-        
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            MovePlayer(new Coordinates(currentTileCoordinates.z, currentTileCoordinates.x - 1));
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            MovePlayer(new Coordinates(currentTileCoordinates.z, currentTileCoordinates.x + 1));
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            MovePlayer(new Coordinates(currentTileCoordinates.z - 1, currentTileCoordinates.x));
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            MovePlayer(new Coordinates(currentTileCoordinates.z + 1, currentTileCoordinates.x));
-        }*/
-    }
-
-    private void UpdatePlayerMovement(/*Coordinates coordinates*/)
-    {
-        var currentTileCoordinates = _player.CurrentTile.Coordinates;
-        Coordinates upperCoordinates = new Coordinates(currentTileCoordinates.z, currentTileCoordinates.x - 1);
-        Coordinates lowerCoordinates = new Coordinates(currentTileCoordinates.z, currentTileCoordinates.x + 1);
-        Coordinates leftMostCoordinates = new Coordinates(currentTileCoordinates.z - 1, currentTileCoordinates.x);
-        Coordinates rightMostCoordinates = new Coordinates(currentTileCoordinates.z + 1, currentTileCoordinates.x);
-        Dictionary<string, Tile> adjacentTiles = new Dictionary<string, Tile>();
-
-        Tile targetTile = _tileManager.GetTileFromCoordinates(upperCoordinates, _player.CurrentRoom.Id);
-        adjacentTiles.Add("up", targetTile);
-        targetTile = _tileManager.GetTileFromCoordinates(lowerCoordinates, _player.CurrentRoom.Id);
-        adjacentTiles.Add("down", targetTile);
-        targetTile = _tileManager.GetTileFromCoordinates(leftMostCoordinates, _player.CurrentRoom.Id);
-        adjacentTiles.Add("left", targetTile);
-        targetTile = _tileManager.GetTileFromCoordinates(rightMostCoordinates, _player.CurrentRoom.Id);
-        adjacentTiles.Add("right", targetTile);
-
-        _player.UpdateMovement(adjacentTiles);
-
-        /*if (targetTile is not null)
-        {
-            _player.SetCurrentTile(targetTile);
-        }*/
->>>>>>> Stashed changes
     }
 
     public void SetPlayer(BasePlayer player)
@@ -101,17 +54,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
         _player = player;
     }
 
-<<<<<<< Updated upstream
     public Transform GetTransform()
     {
         return this.transform;
-=======
-    public enum MoveButton
-    {
-        Up,
-        Down,
-        Left,
-        Right
->>>>>>> Stashed changes
     }
 }

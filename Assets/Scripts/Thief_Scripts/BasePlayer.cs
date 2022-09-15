@@ -10,17 +10,10 @@ public class BasePlayer : MonoBehaviour
     public Tile CurrentTile => _currentTile;
     public Room CurrentRoom => _currentRoom;
 
-<<<<<<< Updated upstream
     [SerializeField] private MoveButton rightButton;
     [SerializeField] private MoveButton leftButton;
     [SerializeField] private MoveButton upButton;
     [SerializeField] private MoveButton downButton;
-=======
-    [SerializeField] private Button rightButton;
-    [SerializeField] private Button leftButton;
-    [SerializeField] private Button upButton;
-    [SerializeField] private Button downButton;
->>>>>>> Stashed changes
 
     public void SetCurrentTile(Tile tile)
     {
@@ -33,7 +26,6 @@ public class BasePlayer : MonoBehaviour
         _currentRoom = room;
     }
 
-<<<<<<< Updated upstream
     public void UpdateMoveButtonByTile(MoveButton.MoveButtonType buttonType, Tile targetTile)
     {
         MoveButton button = GetButton(buttonType);
@@ -65,34 +57,4 @@ public class BasePlayer : MonoBehaviour
         }
         return null;
     }
-=======
-    public Button GetButton(MoveButton button)
-    {
-        switch(button)
-        {
-            case MoveButton.Up:
-                return upButton;
-                break;
-            case MoveButton.Down:
-                return downButton;
-                break;
-            case MoveButton.Left:
-                return leftButton;
-                break;
-            case MoveButton.Right:
-                return rightButton;
-                break;
-        }
-
-        return null;
-    }
-
-    public enum MoveButton
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    }
->>>>>>> Stashed changes
 }
