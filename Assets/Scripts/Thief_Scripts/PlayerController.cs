@@ -33,24 +33,28 @@ public class PlayerController : MonoBehaviour, IPlayerController
             if (Input.GetKeyDown(KeyCode.D))
             {
                 Coordinates rightMostCoordinates = new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z - 1);
+                //UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType.Right, rightMostCoordinates);
                 MovePlayer(_tileManager.GetTileFromCoordinates(rightMostCoordinates, _player.CurrentRoom.Id));
             }
 
             if (Input.GetKeyDown(KeyCode.A))
             {
                 Coordinates leftMostCoordinates = new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z + 1);
+                //UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType.Left, leftMostCoordinates);
                 MovePlayer(_tileManager.GetTileFromCoordinates(leftMostCoordinates, _player.CurrentRoom.Id));
             }
 
             if (Input.GetKeyDown(KeyCode.S))
             {
                 Coordinates lowerCoordinates = new Coordinates(currentTileCoordinates.x - 1, currentTileCoordinates.z);
+                //UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType.Down, lowerCoordinates);
                 MovePlayer(_tileManager.GetTileFromCoordinates(lowerCoordinates, _player.CurrentRoom.Id));
             }
 
             if (Input.GetKeyDown(KeyCode.W))
             {
                 Coordinates upperCoordinates = new Coordinates(currentTileCoordinates.x + 1, currentTileCoordinates.z);
+                //UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType.Up, upperCoordinates);
                 MovePlayer(_tileManager.GetTileFromCoordinates(upperCoordinates, _player.CurrentRoom.Id));
             }
         }
@@ -74,12 +78,24 @@ public class PlayerController : MonoBehaviour, IPlayerController
     private void UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType buttonType, Coordinates targetCoordinates)
     {
         Tile targetTile = _tileManager.GetTileFromCoordinates(targetCoordinates, _player.CurrentRoom.Id);
+        
+        if(targetTile is null)
+        {
+            foreach(Tile tile in _player.CurrentTile.GetTilesThroughDoors())
+            {
+                if(tile.Coordinates == targetCoordinates)
+                {
+                    targetTile = tile;
+                }
+            }
+        }
+
         _player.UpdateMoveButtonByTile(buttonType, targetTile);
     }
 
     public void MovePlayer(Tile startingTile)
-    {
-        if(startingTile is not null)
+    {   
+        if (startingTile is not null)
         {
             _player.SetCurrentTile(startingTile);
             UpdatePlayerMovement();

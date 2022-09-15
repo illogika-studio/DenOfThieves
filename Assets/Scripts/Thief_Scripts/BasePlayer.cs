@@ -2,25 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class BasePlayer : MonoBehaviour
 {
-    private Tile _currentTile;
-    private Room _currentRoom;
-    private bool _isMoving = false;
-    public Tile CurrentTile => _currentTile;
-    public Room CurrentRoom => _currentRoom;
-
     [SerializeField] private MoveButton rightButton;
     [SerializeField] private MoveButton leftButton;
     [SerializeField] private MoveButton upButton;
     [SerializeField] private MoveButton downButton;
+    
+    private bool _isMoving = false;
+
+    private Tile _currentTile;
+    public Tile CurrentTile => _currentTile;
+    private Room _currentRoom;
+    public Room CurrentRoom => _currentRoom;
+
+    private ITileManager _tileManager;
+
+    [Inject]
+    public void Init(ITileManager tileManager)
+    {
+        _tileManager = tileManager;
+    }
 
     public void SetCurrentTile(Tile tile, bool instant = false)
     {
         if (!_isMoving)
         {
             _currentTile = tile;
+
+            Room tileRoom = _tileManager.GetRoomFromTile(_currentTile);
+
+            if (tileRoom.Id != _currentRoom.Id)
+            {
+                _currentRoom = tileRoom;
+            }
+
             if (instant)
             {
                 transform.position = new Vector3(_currentTile.Coordinates.x, 0, _currentTile.Coordinates.z);

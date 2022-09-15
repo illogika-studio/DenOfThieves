@@ -34,6 +34,17 @@ public class TileManager : MonoBehaviour, ITileManager
                 StartingTilesList.Add(room.StartingTile);   
             }
         }
+
+        foreach (var door in _levelData.DoorsList)
+        {
+            door.SetupDoor();
+        }
+    }
+
+    public Room GetRoomFromTile(Tile tile)
+    {
+        int roomId = GetRoomIdFromTile(tile);
+        return _levelData.RoomsList.Find(x => x.Id == roomId);
     }
 
     public int GetRoomIdFromTile(Tile tile)

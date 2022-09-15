@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33412068560801134}
   - component: {fileID: 23620495785594248}
   - component: {fileID: 6678980823817692447}
+  - component: {fileID: 6439993646310109919}
   m_Layer: 0
   m_Name: Neo_WallDoorFrame_01_4m_snaps001
   m_TagString: Untagged
@@ -100,6 +101,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 56079a0b5725b6f44bc864daf8832432, type: 2}
+--- !u!114 &6439993646310109919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997374902624778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba89b0702d70e05458923aeb1b8a590f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1760318987630319375
 GameObject:
   m_ObjectHideFlags: 0

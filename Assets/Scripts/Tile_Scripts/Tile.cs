@@ -6,21 +6,37 @@ public abstract class Tile : MonoBehaviour
 {
     public abstract int LightValue { get; }
     public abstract int SoundValue { get; }
-    
     public Coordinates Coordinates { get; private set; }
     public Dictionary<InteractableElement, List<Action>> AvailableActionList { get; private set; }
+    public List<Door> doors = new List<Door>();
 
     public abstract void UpdateLightValue(int amount);
     public abstract void UpdateSoundValue(int amount);
-    
     private void Awake()
     {
         var x = Mathf.Round(transform.position.x);
         var z = Mathf.Round(transform.position.z);
 
         var offset = GetOffset();
-                
+
         Coordinates = new Coordinates(x + offset.x, z + offset.z);
+    }
+    
+    public List<Tile> GetTilesThroughDoors()
+    {
+        List<Tile> adjacentTiles = new List<Tile>();
+
+        foreach(Door door in doors)
+        {
+            //TODO: Check if door is locked.
+            adjacentTiles.Add(door.GetOtherSideTile(this));
+        }
+        return adjacentTiles;
+    }
+
+    public void AddDoor(Door door)
+    {
+        doors.Add(door);
     }
 
     private Vector3 GetOffset()
@@ -42,7 +58,7 @@ public abstract class Tile : MonoBehaviour
 
         return offset;
     }
-    
+
     public Vector3 GetRealPosition()
     {
         return GetRoundedPosition() + GetOffset();
