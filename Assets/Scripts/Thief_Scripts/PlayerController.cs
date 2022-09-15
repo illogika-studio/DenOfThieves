@@ -25,34 +25,36 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     private void Update()
     {
-        if(_player.CurrentTile is not null)
+#if UNITY_EDITOR
+        if (_player.CurrentTile is not null)
         {
             var currentTileCoordinates = _player.CurrentTile.Coordinates;
 
             if (Input.GetKeyDown(KeyCode.D))
             {
-                Coordinates rightMostCoordinates = new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z + 1);
+                Coordinates rightMostCoordinates = new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z - 1);
                 MovePlayer(_tileManager.GetTileFromCoordinates(rightMostCoordinates, _player.CurrentRoom.Id));
             }
 
             if (Input.GetKeyDown(KeyCode.A))
             {
-                Coordinates leftMostCoordinates = new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z - 1);
+                Coordinates leftMostCoordinates = new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z + 1);
                 MovePlayer(_tileManager.GetTileFromCoordinates(leftMostCoordinates, _player.CurrentRoom.Id));
             }
 
             if (Input.GetKeyDown(KeyCode.S))
             {
-                Coordinates lowerCoordinates = new Coordinates(currentTileCoordinates.x + 1, currentTileCoordinates.z);
+                Coordinates lowerCoordinates = new Coordinates(currentTileCoordinates.x - 1, currentTileCoordinates.z);
                 MovePlayer(_tileManager.GetTileFromCoordinates(lowerCoordinates, _player.CurrentRoom.Id));
             }
 
             if (Input.GetKeyDown(KeyCode.W))
             {
-                Coordinates upperCoordinates = new Coordinates(currentTileCoordinates.x - 1, currentTileCoordinates.z);
+                Coordinates upperCoordinates = new Coordinates(currentTileCoordinates.x + 1, currentTileCoordinates.z);
                 MovePlayer(_tileManager.GetTileFromCoordinates(upperCoordinates, _player.CurrentRoom.Id));
             }
         }
+#endif
     }
 
     public void UpdatePlayerMovement()
