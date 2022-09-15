@@ -144,10 +144,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08ce4947e2fdd40039cfa0144b8378a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   rightButton: {fileID: 6567671865790057123}
   leftButton: {fileID: 752254249678724070}
   upButton: {fileID: 7505351114525901473}
   downButton: {fileID: 7652089183759348665}
+=======
+  rightButton: {fileID: 3389523720617761726}
+  leftButton: {fileID: 9106142517143800571}
+  upButton: {fileID: 2019673171731862460}
+  downButton: {fileID: 2170349708927918756}
+>>>>>>> Stashed changes
 --- !u!1 &6583552501268664918
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +255,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2259224014053561736, guid: 3746f9bb21bc9424aab5b2fb98dd467d, type: 3}
   m_PrefabInstance: {fileID: 9709125201149620}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9106142517143800571 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9114716350680511567, guid: 3746f9bb21bc9424aab5b2fb98dd467d, type: 3}
+  m_PrefabInstance: {fileID: 9709125201149620}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5870437609593843697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -297,6 +315,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3746f9bb21bc9424aab5b2fb98dd467d, type: 3}
+--- !u!114 &3389523720617761726 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9114716350680511567, guid: 3746f9bb21bc9424aab5b2fb98dd467d, type: 3}
+  m_PrefabInstance: {fileID: 5870437609593843697}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5633329830916192889 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2259224014053561736, guid: 3746f9bb21bc9424aab5b2fb98dd467d, type: 3}
@@ -362,15 +391,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3746f9bb21bc9424aab5b2fb98dd467d, type: 3}
+<<<<<<< Updated upstream
 --- !u!114 &7652089183759348665 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 743926427636819282, guid: 3746f9bb21bc9424aab5b2fb98dd467d, type: 3}
+=======
+--- !u!114 &2170349708927918756 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9114716350680511567, guid: 3746f9bb21bc9424aab5b2fb98dd467d, type: 3}
+>>>>>>> Stashed changes
   m_PrefabInstance: {fileID: 6945495883446540011}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: 583b1db3be8f40c4cbb05143ee7bb632, type: 3}
+=======
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+>>>>>>> Stashed changes
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &9167424419817390947 stripped
@@ -427,15 +466,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3746f9bb21bc9424aab5b2fb98dd467d, type: 3}
+<<<<<<< Updated upstream
 --- !u!114 &7505351114525901473 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 743926427636819282, guid: 3746f9bb21bc9424aab5b2fb98dd467d, type: 3}
+=======
+--- !u!114 &2019673171731862460 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9114716350680511567, guid: 3746f9bb21bc9424aab5b2fb98dd467d, type: 3}
+>>>>>>> Stashed changes
   m_PrefabInstance: {fileID: 7096169113524332531}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: 583b1db3be8f40c4cbb05143ee7bb632, type: 3}
+=======
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+>>>>>>> Stashed changes
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &9016426852189123195 stripped
