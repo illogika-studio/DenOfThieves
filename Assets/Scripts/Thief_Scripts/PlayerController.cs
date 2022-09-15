@@ -23,6 +23,38 @@ public class PlayerController : MonoBehaviour, IPlayerController
         UpdatePlayerMovement();
     }
 
+    private void Update()
+    {
+        if(_player.CurrentTile is not null)
+        {
+            var currentTileCoordinates = _player.CurrentTile.Coordinates;
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                Coordinates rightMostCoordinates = new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z + 1);
+                MovePlayer(_tileManager.GetTileFromCoordinates(rightMostCoordinates, _player.CurrentRoom.Id));
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                Coordinates leftMostCoordinates = new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z - 1);
+                MovePlayer(_tileManager.GetTileFromCoordinates(leftMostCoordinates, _player.CurrentRoom.Id));
+            }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                Coordinates lowerCoordinates = new Coordinates(currentTileCoordinates.x + 1, currentTileCoordinates.z);
+                MovePlayer(_tileManager.GetTileFromCoordinates(lowerCoordinates, _player.CurrentRoom.Id));
+            }
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                Coordinates upperCoordinates = new Coordinates(currentTileCoordinates.x - 1, currentTileCoordinates.z);
+                MovePlayer(_tileManager.GetTileFromCoordinates(upperCoordinates, _player.CurrentRoom.Id));
+            }
+        }
+    }
+
     public void UpdatePlayerMovement()
     {
         var currentTileCoordinates = _player.CurrentTile.Coordinates;
@@ -45,8 +77,11 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     public void MovePlayer(Tile startingTile)
     {
-        _player.SetCurrentTile(startingTile);
-        UpdatePlayerMovement();
+        if(startingTile is not null)
+        {
+            _player.SetCurrentTile(startingTile);
+            UpdatePlayerMovement();
+        }
     }
 
     public void SetPlayer(BasePlayer player)
