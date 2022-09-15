@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
     {
         var startingTile = _tileManager.StartingTilesList[0];
         _player.SetCurrentRoom(_tileManager.StartingRoom);
-        _player.SetCurrentTile(startingTile);
+        _player.SetCurrentTile(startingTile, instant: true);
         UpdatePlayerMovement();
     }
 

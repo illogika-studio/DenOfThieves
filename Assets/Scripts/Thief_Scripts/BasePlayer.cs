@@ -7,6 +7,7 @@ public class BasePlayer : MonoBehaviour
 {
     private Tile _currentTile;
     private Room _currentRoom;
+    private bool _isMoving = false;
     public Tile CurrentTile => _currentTile;
     public Room CurrentRoom => _currentRoom;
 
@@ -15,10 +16,37 @@ public class BasePlayer : MonoBehaviour
     [SerializeField] private MoveButton upButton;
     [SerializeField] private MoveButton downButton;
 
-    public void SetCurrentTile(Tile tile)
+    public void SetCurrentTile(Tile tile, bool instant = false)
     {
-        _currentTile = tile;
-        transform.position = new Vector3(_currentTile.Coordinates.x, 0, _currentTile.Coordinates.z);
+        if (!_isMoving)
+        {
+            _currentTile = tile;
+            if (instant)
+            {
+                transform.position = new Vector3(_currentTile.Coordinates.x, 0, _currentTile.Coordinates.z);
+            }
+            else
+            {
+                StartCoroutine(LerpMove(new Vector3(_currentTile.Coordinates.x, 0, _currentTile.Coordinates.z)));
+            }
+        }
+    }
+
+    IEnumerator LerpMove(Vector3 endLocation)
+    {
+        _isMoving = true;
+        Vector3 startLocation = transform.position;
+
+        float lerpDuration = 0.5f;
+        float timeElapsed = 0;
+        while (timeElapsed < lerpDuration)
+        {
+            transform.position = Vector3.Lerp(startLocation, endLocation, timeElapsed / lerpDuration);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = endLocation;
+        _isMoving = false;
     }
 
     public void SetCurrentRoom(Room room)
