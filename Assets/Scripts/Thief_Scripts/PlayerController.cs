@@ -32,35 +32,45 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
             if (Input.GetKeyDown(KeyCode.D))
             {
-                Coordinates rightMostCoordinates = new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z - 1);
-                //UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType.Right, rightMostCoordinates);
-                MovePlayer(_tileManager.GetTileFromCoordinates(rightMostCoordinates, _player.CurrentRoom.Id));
+                KeyMovement(new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z - 1));
             }
 
             if (Input.GetKeyDown(KeyCode.A))
             {
-                Coordinates leftMostCoordinates = new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z + 1);
-                //UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType.Left, leftMostCoordinates);
-                MovePlayer(_tileManager.GetTileFromCoordinates(leftMostCoordinates, _player.CurrentRoom.Id));
+                KeyMovement(new Coordinates(currentTileCoordinates.x, currentTileCoordinates.z + 1));
             }
 
             if (Input.GetKeyDown(KeyCode.S))
             {
-                Coordinates lowerCoordinates = new Coordinates(currentTileCoordinates.x - 1, currentTileCoordinates.z);
-                //UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType.Down, lowerCoordinates);
-                MovePlayer(_tileManager.GetTileFromCoordinates(lowerCoordinates, _player.CurrentRoom.Id));
+                KeyMovement(new Coordinates(currentTileCoordinates.x - 1, currentTileCoordinates.z));
             }
 
             if (Input.GetKeyDown(KeyCode.W))
             {
-                Coordinates upperCoordinates = new Coordinates(currentTileCoordinates.x + 1, currentTileCoordinates.z);
-                //UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType.Up, upperCoordinates);
-                MovePlayer(_tileManager.GetTileFromCoordinates(upperCoordinates, _player.CurrentRoom.Id));
+                KeyMovement(new Coordinates(currentTileCoordinates.x + 1, currentTileCoordinates.z));
             }
         }
 #endif
     }
+#if UNITY_EDITOR
+    private void KeyMovement(Coordinates coordinates)
+    {
+        Tile targetTile = _tileManager.GetTileFromCoordinates(coordinates, _player.CurrentRoom.Id);
 
+        if(targetTile is null)
+        {
+            foreach (Tile tile in _player.CurrentTile.GetTilesThroughDoors())
+            {
+                if (tile.Coordinates == coordinates)
+                {
+                    targetTile = tile;
+                }
+            }
+        }
+
+        MovePlayer(targetTile);
+    }
+#endif
     public void UpdatePlayerMovement()
     {
         var currentTileCoordinates = _player.CurrentTile.Coordinates;
