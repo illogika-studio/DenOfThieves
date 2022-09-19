@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,12 +11,17 @@ public class BasePlayer : MonoBehaviour
     [SerializeField] private MoveButton leftButton;
     [SerializeField] private MoveButton upButton;
     [SerializeField] private MoveButton downButton;
+    [SerializeField] private List<ActionSetup> _actionsSetupList = new List<ActionSetup>();
     
     private Tile _currentTile;
     public Tile CurrentTile => _currentTile;
+    
     private int _currentRoomId;
     public int CurrentRoomId => _currentRoomId;
-
+    
+    private List<Action> _actionsList = new List<Action>();
+    public List<Action> ActionsList => _actionsList;
+    
     private ITileManager _tileManager;
     private IPlayerController _playerController;
 
@@ -25,7 +31,22 @@ public class BasePlayer : MonoBehaviour
         _tileManager = tileManager;
         _playerController = playerController;
     }
-    
+
+    private void Awake()
+    {
+        foreach (var actionForInspector in _actionsSetupList)
+        {
+            switch (actionForInspector.ActionType)
+            {
+                case Action.ActionType.Move :
+                {
+                    _actionsList.Add(new MoveAction());
+                    break;
+                }
+            }
+        }
+    }
+
     public void SetCurrentTile(Tile tile)
     {
         _currentTile = tile;

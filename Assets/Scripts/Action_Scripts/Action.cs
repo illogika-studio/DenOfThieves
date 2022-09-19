@@ -1,25 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Zenject;
 
-public class Action : MonoBehaviour
+public abstract class Action
 {
-    private ILevelData _levelData;
-    
-    [Inject]
-    private void Initialize(ILevelData levelData)
+    public enum ActionType
     {
-        _levelData = levelData;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
+        Move
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract ActionType ActionTypeEnum { get; set; }
+    public abstract string DisplayName { get; set; }
+    
+    public abstract void DoAction();
 }

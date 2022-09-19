@@ -148,6 +148,8 @@ MonoBehaviour:
   leftButton: {fileID: 752254249678724070}
   upButton: {fileID: 7505351114525901473}
   downButton: {fileID: 7652089183759348665}
+  _actionsSetupList:
+  - _actionsType: 0
 --- !u!1 &6583552501268664918
 GameObject:
   m_ObjectHideFlags: 0
