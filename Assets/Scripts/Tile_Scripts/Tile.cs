@@ -6,39 +6,27 @@ public abstract class Tile : MonoBehaviour
 {
     public abstract int LightValue { get; }
     public abstract int SoundValue { get; }
+    
+    private List<Door> doorsList = new List<Door>();
+
+    private int _roomId;
+    public int RoomId => _roomId;
+    
     public Coordinates Coordinates { get; private set; }
     public Dictionary<InteractableElement, List<Action>> AvailableActionList { get; private set; }
-    public List<Door> doors = new List<Door>();
-
+    
     public abstract void UpdateLightValue(int amount);
     public abstract void UpdateSoundValue(int amount);
+   
     private void Awake()
     {
-        var x = Mathf.Round(transform.position.x);
-        var z = Mathf.Round(transform.position.z);
-
+        Vector3 v = MathTools.RoundVector3(transform.position);
+        transform.position = v;
+        
         var offset = GetOffset();
-
-        Coordinates = new Coordinates(x + offset.x, z + offset.z);
+        Coordinates = new Coordinates(v.x + offset.x, v.z + offset.z);
     }
     
-    public List<Tile> GetTilesThroughDoors()
-    {
-        List<Tile> adjacentTiles = new List<Tile>();
-
-        foreach(Door door in doors)
-        {
-            //TODO: Check if door is locked.
-            adjacentTiles.Add(door.GetOtherSideTile(this));
-        }
-        return adjacentTiles;
-    }
-
-    public void AddDoor(Door door)
-    {
-        doors.Add(door);
-    }
-
     private Vector3 GetOffset()
     {
         Vector3 offset = Vector3.zero;
@@ -59,17 +47,26 @@ public abstract class Tile : MonoBehaviour
         return offset;
     }
 
-    public Vector3 GetRealPosition()
+    public void SetRoomId(int id)
     {
-        return GetRoundedPosition() + GetOffset();
+        _roomId = id;
+    }
+    
+    public List<Tile> GetTilesThroughDoors()
+    {
+        List<Tile> adjacentTiles = new List<Tile>();
+
+        foreach(Door door in doorsList)
+        {
+            //TODO: Check if door is locked.
+            adjacentTiles.Add(door.GetOtherSideTile(this));
+        }
+        
+        return adjacentTiles;
     }
 
-    private Vector3 GetRoundedPosition()
+    public void AddDoor(Door door)
     {
-        var roundX = Mathf.Round(transform.position.x);
-        var roundY = Mathf.Round(transform.position.y);
-        var roundZ = Mathf.Round(transform.position.z);
-
-        return new Vector3(roundX, roundY, roundZ);
+        doorsList.Add(door);
     }
 }

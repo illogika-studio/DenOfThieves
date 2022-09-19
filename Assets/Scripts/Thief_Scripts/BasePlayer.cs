@@ -11,67 +11,33 @@ public class BasePlayer : MonoBehaviour
     [SerializeField] private MoveButton upButton;
     [SerializeField] private MoveButton downButton;
     
-    private bool _isMoving = false;
-
     private Tile _currentTile;
     public Tile CurrentTile => _currentTile;
-    private Room _currentRoom;
-    public Room CurrentRoom => _currentRoom;
+    private int _currentRoomId;
+    public int CurrentRoomId => _currentRoomId;
 
     private ITileManager _tileManager;
+    private IPlayerController _playerController;
 
     [Inject]
-    public void Init(ITileManager tileManager)
+    public void Init(ITileManager tileManager, IPlayerController playerController)
     {
         _tileManager = tileManager;
+        _playerController = playerController;
     }
-
-    public void SetCurrentTile(Tile tile, bool instant = false)
+    
+    public void SetCurrentTile(Tile tile)
     {
-        if (!_isMoving)
-        {
-            _currentTile = tile;
-
-            Room tileRoom = _tileManager.GetRoomFromTile(_currentTile);
-
-            if (tileRoom.Id != _currentRoom.Id)
-            {
-                _currentRoom = tileRoom;
-            }
-
-            if (instant)
-            {
-                transform.position = new Vector3(_currentTile.Coordinates.x, 0, _currentTile.Coordinates.z);
-            }
-            else
-            {
-                StartCoroutine(LerpMove(new Vector3(_currentTile.Coordinates.x, 0, _currentTile.Coordinates.z)));
-            }
-        }
+        _currentTile = tile;
+        SetCurrentRoom(tile);
+        _playerController.UpdatePlayerMovement();
     }
-
-    IEnumerator LerpMove(Vector3 endLocation)
+    
+    private void SetCurrentRoom(Tile tile)
     {
-        _isMoving = true;
-        Vector3 startLocation = transform.position;
-
-        float lerpDuration = 0.5f;
-        float timeElapsed = 0;
-        while (timeElapsed < lerpDuration)
-        {
-            transform.position = Vector3.Lerp(startLocation, endLocation, timeElapsed / lerpDuration);
-            timeElapsed += Time.deltaTime;
-            yield return null;
-        }
-        transform.position = endLocation;
-        _isMoving = false;
+        _currentRoomId = tile.RoomId;
     }
-
-    public void SetCurrentRoom(Room room)
-    {
-        _currentRoom = room;
-    }
-
+    
     public void UpdateMoveButtonByTile(MoveButton.MoveButtonType buttonType, Tile targetTile)
     {
         MoveButton button = GetButton(buttonType);

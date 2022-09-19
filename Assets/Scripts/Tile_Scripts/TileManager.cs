@@ -19,22 +19,23 @@ public class TileManager : MonoBehaviour, ITileManager
 
     private void Start()
     {
-        //Populate the list of tiles per rooms and the list of starting tiles
         foreach (var room in _levelData.RoomsList)
         {
-            TilesListPerRooms.Add(room.Id, room.TilesList);
-            
-            if (room.StartingTile != null)
+            if (room.StartingTile is not null)
             {
-                if(StartingTilesList.Count < 1)
-                {
-                    _startingRoom = room;
-                }
-
-                StartingTilesList.Add(room.StartingTile);   
+                StartingTilesList.Add(room.StartingTile);
             }
-        }
 
+            var tileList = new List<Tile>();
+            foreach (var tile in room.TilesList)
+            {
+                tile.SetRoomId(room.Id);
+                tileList.Add(tile);
+            }
+            
+            TilesListPerRooms[room.Id] = tileList;
+        }
+        
         foreach (var door in _levelData.DoorsList)
         {
             door.SetupDoor();
@@ -43,16 +44,9 @@ public class TileManager : MonoBehaviour, ITileManager
 
     public Room GetRoomFromTile(Tile tile)
     {
-        int roomId = GetRoomIdFromTile(tile);
-        return _levelData.RoomsList.Find(x => x.Id == roomId);
+        return _levelData.RoomsList.Find(x => x.Id == tile.RoomId);
     }
 
-    public int GetRoomIdFromTile(Tile tile)
-    {
-        int myKey = TilesListPerRooms.FirstOrDefault(x => x.Value.Contains(tile)).Key;
-        return myKey;
-    }
-    
     public Tile GetTileFromCoordinates(Coordinates coordinates)
     {
         foreach (var room in TilesListPerRooms)
