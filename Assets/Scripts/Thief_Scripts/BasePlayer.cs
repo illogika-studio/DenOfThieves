@@ -75,6 +75,14 @@ public class BasePlayer : MonoBehaviour
         }
     }
 
+    public void HideMoveButtons()
+    {
+        rightButton.gameObject.SetActive(false);
+        leftButton.gameObject.SetActive(false);
+        upButton.gameObject.SetActive(false);
+        downButton.gameObject.SetActive(false);
+    }
+
     private MoveButton GetButton(MoveButton.MoveButtonType buttonType)
     {
         switch(buttonType)

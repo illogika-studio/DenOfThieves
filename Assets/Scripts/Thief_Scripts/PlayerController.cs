@@ -78,28 +78,24 @@ public class PlayerController : MonoBehaviour, IPlayerController
     
     private void UpdateMoveButtonByCoordinates(MoveButton.MoveButtonType buttonType, Coordinates targetCoordinates)
     {
-        Tile targetTile = _tileManager.GetTileFromCoordinates(targetCoordinates, _player.CurrentRoomId);
-        
-        if(targetTile is null)
-        {
-            foreach(Tile tile in _player.CurrentTile.GetTilesThroughDoors())
-            {
-                if(tile.Coordinates == targetCoordinates)
-                {
-                    targetTile = tile;
-                }
-            }
-        }
-
+        Tile targetTile = GetAccessibleTile(targetCoordinates);
         _player.UpdateMoveButtonByTile(buttonType, targetTile);
     }
     
 #if UNITY_EDITOR
     private void KeyMovement(Coordinates coordinates)
     {
+        Tile targetTile = GetAccessibleTile(coordinates);
+
+        MovePlayer(targetTile);
+    }
+#endif
+
+    private Tile GetAccessibleTile(Coordinates coordinates)
+    {
         Tile targetTile = _tileManager.GetTileFromCoordinates(coordinates, _player.CurrentRoomId);
 
-        if(targetTile is null)
+        if (targetTile is null)
         {
             foreach (Tile tile in _player.CurrentTile.GetTilesThroughDoors())
             {
@@ -110,9 +106,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
             }
         }
 
-        MovePlayer(targetTile);
+        return targetTile;
     }
-#endif
 
     public void MovePlayer(Tile targetTile)
     {
@@ -125,6 +120,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
     IEnumerator LerpMove(Tile targetTile)
     {
         IsMoving = true;
+        _player.HideMoveButtons();
         Vector3 startLocation = _player.transform.position;
         Vector3 endLocation = new Vector3(targetTile.Coordinates.x, _player.transform.position.y, targetTile.Coordinates.z);
         float timeElapsed = 0;
@@ -138,7 +134,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
         
         transform.position = endLocation;
         _player.SetCurrentTile(targetTile);
-        UpdatePlayerMovement();
         IsMoving = false;
     }
     
