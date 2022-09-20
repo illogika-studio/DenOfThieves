@@ -1,30 +1,35 @@
+using System;
 using System.Drawing;
 using UnityEngine;
 
+[Serializable]
 public class Coordinates
 {
+    [SerializeField] private int _z;
+    [SerializeField] private int _x;
+
     // Z would be X in 2D
-    public int z { get; }
-    
+    public int Z => _z;
+
     // X would be Y in 2D
-    public int x { get; }
+    public int X => _x;
 
     public Coordinates()
-    { 
-        z = 0;
-        x = 0;
+    {
+        _z = 0;
+        _x = 0;
     }
     
     public Coordinates(int xPoint, int zPoint)
     {
-        x = xPoint;
-        z = zPoint;
+        _x = xPoint;
+        _z = zPoint;
     }
     
     public Coordinates(float xPoint, float zPoint)
     {
-        x = (int)xPoint;
-        z = (int)zPoint;
+        _x = (int)xPoint;
+        _z = (int)zPoint;
     }
 
     public static bool operator ==(Coordinates lhs, Coordinates rhs)
@@ -63,6 +68,26 @@ public class Coordinates
             return false;
         }
 
-        return z == c.z && x == c.x;
+        return Z == c.Z && X == c.X;
+    }
+
+    public static Coordinates operator +(Coordinates lhs, Coordinates rhs)
+    {
+        if (lhs is null)
+        {
+            if (rhs is null)
+            {
+                return new Coordinates();
+            }
+
+            return rhs;
+        }
+        else
+        {
+            if (rhs is null)
+                return lhs;
+        }
+
+        return new Coordinates(lhs.X + rhs.X, lhs.Z + rhs.Z);
     }
 }

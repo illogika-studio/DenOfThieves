@@ -9,4 +9,6 @@ public interface IPlayerController
     public void MovePlayer(Tile startingTile);
     public Transform GetTransform();
     public void UpdatePlayerMovement();
+    public void CreateMoveButton(Coordinates coordinates);
+    public Coordinates GetPlayerCoordinates();
 }

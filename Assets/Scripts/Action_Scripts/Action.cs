@@ -3,15 +3,15 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Zenject;
 
-public abstract class Action
+public abstract class Action: MonoBehaviour
 {
     public enum ActionType
     {
-        Move
+        Move,
+        Door
     }
 
-    public abstract ActionType ActionTypeEnum { get; set; }
-    public abstract string DisplayName { get; set; }
-    
-    public abstract void DoAction();
+    public abstract ActionType ActionTypeEnum { get; }
+    public abstract string DisplayName { get; }
+    public abstract void CreateActionButtons();
 }
