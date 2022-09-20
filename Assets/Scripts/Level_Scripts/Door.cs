@@ -18,7 +18,7 @@ public class Door : MonoBehaviour
 
     public void SetupDoor()
     {
-        var pos = MathTools.RoundVector3(transform.position);
+        var pos = UtilsClass.RoundVector3(transform.position);
 
         _doorCoordinates = new Coordinates(pos.x, pos.z);
 

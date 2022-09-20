@@ -20,7 +20,7 @@ public abstract class Tile : MonoBehaviour
    
     private void Awake()
     {
-        Vector3 v = MathTools.RoundVector3(transform.position);
+        Vector3 v = UtilsClass.RoundVector3(transform.position);
         transform.position = v;
         
         var offset = GetOffset();
