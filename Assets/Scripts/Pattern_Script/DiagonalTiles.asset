@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: DiagonalTiles
   m_EditorClassIdentifier: 
   _coordinatesAffected:
-  - _z: -2
-    _x: -2
-  - _z: 2
-    _x: 2
-  - _z: -2
-    _x: 2
-  - _z: 2
-    _x: -2
+  - _z: -1
+    _x: -1
+  - _z: 1
+    _x: 1
+  - _z: -1
+    _x: 1
+  - _z: 1
+    _x: -1
+  _extraPatterns: []

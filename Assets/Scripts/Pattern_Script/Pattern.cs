@@ -6,8 +6,10 @@ using UnityEngine;
 public class Pattern : ScriptableObject
 {
     [SerializeField] private List<Coordinates> _coordinatesAffected;
-    public List<Coordinates> CoodinatesAffected => _coordinatesAffected;
     
+    private List<Coordinates> _coodinatesToCheck;
+    public List<Coordinates> CoodinatesAffected => _coodinatesToCheck;
+
     [SerializeField] private List<Pattern> _extraPatterns;
     public List<Pattern> ExtraPatterns => _extraPatterns;
 
@@ -15,18 +17,23 @@ public class Pattern : ScriptableObject
 
     public void OnEnable()
     {
-        foreach(Pattern pattern in _extraPatterns)
+        foreach(Coordinates coordinates in _coordinatesAffected)
+        {
+            _coodinatesToCheck.Add(coordinates);
+        }
+
+        foreach (Pattern pattern in _extraPatterns)
         {
             foreach(Coordinates coordinates in pattern.CoodinatesAffected)
             {
-                _coordinatesAffected.Add(coordinates);
+                _coodinatesToCheck.Add(coordinates);
             }
         }
     }
 
     public void SetRotation(int rotation)
     {
-        foreach(Coordinates coordinates in _coordinatesAffected)
+        foreach(Coordinates coordinates in _coodinatesToCheck)
         {
             Coordinates offsetCoordinates;
 
